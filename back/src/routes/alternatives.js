@@ -6,7 +6,6 @@ const router = Router();
 router.post("/api/admin/alternatives", async function (req, res){
     const { question_id, alternatives } = req.body
     try {
-        console.log(typeof question_id, Array.isArray(alternatives))
         if (typeof question_id !== "number" || !Array.isArray(alternatives)){
             return res.status(400).json({
                 'StatusCode': res.statusCode,
@@ -22,7 +21,13 @@ router.post("/api/admin/alternatives", async function (req, res){
         })
 
     } catch (error) {
-        console.log('Erro ao conectar-se')
+        console.log('Erro"""', {error})
+        if (error.message.includes("UNIQUE constraint failed")){
+            res.status(409).json({
+                "StatusCoded": res.statusCode,
+                "StatusMessage": `This type'o field already exists in database!`
+            })
+        }
         throw error
     }})
  

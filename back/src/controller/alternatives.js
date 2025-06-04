@@ -5,7 +5,6 @@
 
     export async function insertAlternatives(question_id, alternatives){
         console.log(question_id, alternatives);
-
     try {
         const sql = `INSERT INTO alternatives(alternative_letter, alternative_text, is_correct, question_id)
         VALUES(?, ?, ?, ?)`
@@ -28,7 +27,8 @@
     }await db.run('COMMIT');
     } catch (error) {
         await db.run('ROLLBACK')
-        console.log('error inserting alterantive ')
+        console.log("error inserting alternative ", error)
+        throw error
     }}
 
     export async function getAlternatives(question_id){
