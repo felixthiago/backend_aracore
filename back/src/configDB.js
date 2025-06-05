@@ -11,3 +11,4 @@ export async function openDB(){
         console.log("Error opening database:", error);
     }
 }
+
