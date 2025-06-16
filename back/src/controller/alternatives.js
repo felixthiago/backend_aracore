@@ -8,7 +8,7 @@ export async function insertAlternatives(question_id, alternatives){
 try {
     const sql = `INSERT INTO alternatives(alternative_letter, alternative_text, is_correct, question_id)
     VALUES(?, ?, ?, ?)`
-    await db.run('BEGIN TRANSACTION')
+    // await db.run('BEGIN TRANSACTION')
 
     for (const alt of alternatives) {   
         if (
@@ -16,7 +16,7 @@ try {
             !alt.text ||typeof alt.text !== "string" ||
             typeof alt.is_correct !== "boolean"
         ) {
-            console.log(alt.text, alt.letter, alt.is_correct)
+            // console.log(alt.text, alt.letter, alt.is_correct)
             throw new Error("Erro de parâmetros passados ao inserir questão no banco de dados");
         }
 
@@ -25,9 +25,7 @@ try {
                         alt.is_correct ? 1 : 0,
                         question_id]
                         );
-}await db.run('COMMIT');
-} catch (error) {
-    await db.run('ROLLBACK')
+}} catch (error) {
     console.log("error inserting alternative ", error)
     throw error
 }}
@@ -44,11 +42,36 @@ export async function getAlternatives(question_id){
     }
 }
 
-export async function updateAlternative(question_id){
+export async function updateAlternative(alternative_id, data) {
     try {
-        
+        const db = await openDB();
+
+        if (!data || Object.keys(data).length === 0) {
+            throw new Error("Nenhum dado válido enviado para atualização.");
+        }
+
+        const updated_data = Array.isArray(data.updates) ? data.updates[0] : data
+        const fieldsAllowed = ["alternative_letter", "alternative_text", "is_correct"];
+        const updates = {};
+
+        for (const field of fieldsAllowed) {
+            if (updated_data.hasOwnProperty(field)) {
+                updates[field] = updated_data[field];
+            }
+        }
+
+        if (Object.keys(updates).length === 0) {
+            throw new Error("Nenhum campo válido para atualização.");
+        }
+
+        const fieldsToUpdate = Object.keys(updates).map((key) => `${key} = ?`).join(", ");
+        const values = Object.values(updates);
+
+        await db.run(`UPDATE alternatives SET ${fieldsToUpdate} WHERE alternative_id = ?`, [...values, alternative_id]);
+
+        console.log("Alternativa atualizada com sucesso!");
     } catch (error) {
-        
+        console.error("Erro ao atualizar alternativa no banco de dados:", error);
     }
 }
 

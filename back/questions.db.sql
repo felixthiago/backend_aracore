@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS subcategories (
     category_id INTEGER NOT NULL,
     FOREIGN KEY(category_id) REFERENCES categories(category_id)
 );
+
 INSERT INTO 'categories'(category_name) 
 VALUES('Biologia'),
 ('História'),
@@ -43,6 +44,10 @@ Ao final de um período de 24 horas, a análise dos compostos presentes nesse si
 
 INSERT INTO "alternatives" (alternative_letter, alternative_text, is_correct, question_id)
 VALUES('E', 'texto alternativa', 0, 1);
+
+INSERT INTO "questions" (q_title, q_text, q_year, q_category_id, q_subcategory_id)
+VALUES('Enem 2024', 'Um pintor pretende fazer uma reprodução do quadro Guernica em uma tela de dimensões 20 cm por 30 cm. Essa obra, de autoria do espanhol Pablo Picasso, é uma pintura com 3,6 m de altura e 7,8 m de comprimento. A reprodução a ser feita deverá preencher a maior área possível da tela, mantendo a proporção entre as dimensões da obra original. A escala que deve ser empregada para essa reprodução é', 2024, 3, 4)
+
 
 -- {
 --   "question_id": 1,

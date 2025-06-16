@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { deleteAlternative, getAlternatives, insertAlternatives } from '../controller/alternatives.js';
+import { updateAlternative, deleteAlternative, getAlternatives, insertAlternatives } from '../controller/alternatives.js';
 
 const router = Router();
 
@@ -29,6 +29,10 @@ router.post("/api/admin/alternatives", async function (req, res){
                 "StatusMessage": `This type'o field already exists in database!`
             })
         }
+        res.status(500).json({
+            "StatusCode": res.statusCode,
+            "StatusMessage": error.message
+        })
         throw error
     }})
  
@@ -36,10 +40,7 @@ router.post("/api/admin/alternatives", async function (req, res){
 router.get("/api/admin/alternatives", async function(req, res){
     try {
         const { id } = req.query;
-        console.log(id)
         const data = await getAlternatives(id);
-        console.log(data)
-        // console.log(data, data.length)
         if(!id || !data.length){
             res.status(400).json({
                 "StatusCoded": res.statusCode,
@@ -53,12 +54,38 @@ router.get("/api/admin/alternatives", async function(req, res){
         })
 
     } catch (error) {
-        console.log('eror fecthing alternatives')
-        throw error
+        res.status(500).json({
+            "StatusCode": res.statusCode,
+            "StatusMessage": error.message
+        })
     }
 })
 
-// router.put("")
+router.patch("/api/admin/alternatives", async function(req, res){
+    try {
+        const { id } = req.query
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                "StatusCode": res.statusCode,
+                "StatusMessage": "ID inválido ou não fornecido."
+            });
+        }
+        const updates = req.body;
+        if (!updates || Object.keys(updates).length === 0) {
+            return res.status(400).json({ error: "Nenhum campo enviado para atualização." });
+        }
+        await updateAlternative(id, updates);
+        res.status(200).json({
+            "StatusCode": res.statusCode,
+            "StatusMessage": `${id, updates} updated successfully`
+        })
+    } catch (error) {
+        res.status(500).json({
+            "StatusCode": res.statusCode,
+            "StatusMessage": error.message
+        })
+    }
+});
 
 router.delete("/api/admin/alternatives", async function(req, res){
     try {
@@ -75,7 +102,10 @@ router.delete("/api/admin/alternatives", async function(req, res){
             "StatusMessage": `Succesfully deleted ${id}`
         })
     } catch (error) {
-        
+        res.status(500).json({
+            "StatusCode": res.statusCode,
+            "StatusMessage": error.message
+        })
     }
 })
 
