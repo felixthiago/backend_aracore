@@ -3,7 +3,7 @@ import { updateAlternative, deleteAlternative, getAlternatives, insertAlternativ
 
 const router = Router();
 
-router.post("/api/admin/alternatives", async function (req, res){
+router.post("/api/v1/admin/alternatives", async function (req, res){
     const { question_id, alternatives } = req.body
     console.log(req.body)
     try {
@@ -37,7 +37,7 @@ router.post("/api/admin/alternatives", async function (req, res){
     }})
  
 
-router.get("/api/admin/alternatives", async function(req, res){
+router.get("/api/v1/admin/alternatives", async function(req, res){
     try {
         const { id } = req.query;
         const data = await getAlternatives(id);
@@ -61,7 +61,7 @@ router.get("/api/admin/alternatives", async function(req, res){
     }
 })
 
-router.patch("/api/admin/alternatives", async function(req, res){
+router.patch("/api/v1/admin/alternatives", async function(req, res){
     try {
         const { id } = req.query
         if (!id || isNaN(id)) {
@@ -87,7 +87,7 @@ router.patch("/api/admin/alternatives", async function(req, res){
     }
 });
 
-router.delete("/api/admin/alternatives", async function(req, res){
+router.delete("/api/v1/admin/alternatives", async function(req, res){
     try {
         const { id } = req.query
         await deleteAlternative(id);

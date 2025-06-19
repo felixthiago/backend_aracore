@@ -3,15 +3,15 @@ import { insertCategory, updateCategory, deleteCategory, getAllCategories} from 
 
 const router = Router();
 
-router.get('/', function(req, res){
-    res.status(200).json({
-        "StatusCode": res.statusCode,
-        "StatusMessage": "Api working"
-    })
-})
+// router.get('/', function(req, res){
+//     res.status(200).json({
+//         "StatusCode": res.statusCode,
+//         "StatusMessage": "Api working"
+//     })
+// })
 
 
-router.post("/api/admin/categories", function(req, res){
+router.post("/api/v1/admin/categories", function(req, res){
     const { categoryName } = req.body;
     if(!categoryName){
         res.status(400).json({
@@ -34,7 +34,7 @@ router.post("/api/admin/categories", function(req, res){
     }
 })
 
-router.get("/api/admin/categories", async function(req, res){
+router.get("/api/v1/admin/categories", async function(req, res){
     try {
         const id = req.query.id;
         const categories = await getAllCategories(id ? Number(id) : null);
@@ -52,7 +52,7 @@ router.get("/api/admin/categories", async function(req, res){
     }
 })
 
-router.put("/api/admin/categories", function(req, res){
+router.put("/api/v1/admin/categories", function(req, res){
     const { category_id, category_name } = req.body
     try {
         updateCategory(category_id, category_name);
@@ -68,7 +68,7 @@ router.put("/api/admin/categories", function(req, res){
     }
 });
 
-router.delete("/api/admin/categories", function(req, res){
+router.delete("/api/v1/admin/categories", function(req, res){
     const { id } = req.query;
     console.log(id)
     try {

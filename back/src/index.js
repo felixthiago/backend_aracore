@@ -5,16 +5,24 @@ app.use(express.json())
 import bodyParser from 'body-parser'
 import session from "express-session"
 import cors from "cors";
-app.use(cors())
+app.use(cors());
 
-import categories from "./routes/categories.js"
-import subcategories from "./routes/subcategories.js"
-import alternatives from "./routes/alternatives.js"
+import categories from "./routes/categories.js";
+import subcategories from "./routes/v1/subcategories.js";
+import alternatives from "./routes/alternatives.js";
+import questions from "./routes/v1/questions.js";
 
-const routes = [categories, subcategories, alternatives]
+const routes = [categories, subcategories, alternatives, questions];
 
 routes.forEach(route => {
     app.use(route)
+})
+
+app.get("/health", (req, res) => {
+    res.status(200).json({
+        "StatusCode": res.statusCode,
+        "StatusMessage": "API is working as well"
+    })
 })
 
 app.use(bodyParser.json())

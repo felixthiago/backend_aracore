@@ -1,11 +1,11 @@
 import { Router} from "express";
-import { insertSubcategory, getSubcategories, updateSubcategory, deleteSubcategory} from "../controller/subcategories.js";
+import { insertSubcategory, getSubcategories, updateSubcategory, deleteSubcategory} from "../../controller/subcategories.js";
 
 const router = Router();
 
-// CRUD Subcategories   
+// CRUD Subcategories
 
-router.post("/api/admin/subcategories", async function(req, res){
+router.post("/api/v1/admin/subcategories", async function(req, res){
     const { subcategory_name, category_id } = req.body;
     try {
         if(!subcategory_name || !category_id){
@@ -28,7 +28,7 @@ router.post("/api/admin/subcategories", async function(req, res){
     }
 })
 
-router.get("/api/admin/subcategories", async function(req, res){
+router.get("/api/v1/admin/subcategories", async function(req, res){
     try {
         const categoryID = req.query.id;
         const subcategories = await getSubcategories(categoryID ? Number(categoryID) : null);
@@ -46,7 +46,7 @@ router.get("/api/admin/subcategories", async function(req, res){
     }
 })
 
-router.put("/api/admin/subcategories", async function(req, res){
+router.put("/api/v1/admin/subcategories", async function(req, res){
     try {
         const { subcategory_name, subcategory_id } = req.body;
         await updateSubcategory(subcategory_id, subcategory_name);
@@ -62,7 +62,7 @@ router.put("/api/admin/subcategories", async function(req, res){
     }
 })
 
-router.delete("/api/admin/subcategories", async function(req, res){
+router.delete("/api/v1/admin/subcategories", async function(req, res){
     try {
         const { id } = req.query;
         await deleteSubcategory(id);

@@ -55,7 +55,7 @@ export async function updateAlternative(alternative_id, data) {
         const updates = {};
 
         for (const field of fieldsAllowed) {
-            if (updated_data.hasOwnProperty(field)) {
+            if (Object.prototype.hasOwnProperty.call(updated_data, field)) {
                 updates[field] = updated_data[field];
             }
         }
