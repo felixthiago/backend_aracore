@@ -7,9 +7,9 @@ import session from "express-session"
 import cors from "cors";
 app.use(cors());
 
-import categories from "./routes/categories.js";
+import categories from "./routes/v1/categories.js";
 import subcategories from "./routes/v1/subcategories.js";
-import alternatives from "./routes/alternatives.js";
+import alternatives from "./routes/v1/alternatives.js";
 import questions from "./routes/v1/questions.js";
 
 const routes = [categories, subcategories, alternatives, questions];

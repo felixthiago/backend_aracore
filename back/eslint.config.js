@@ -9,3 +9,4 @@ export default defineConfig([
   { files: ["**/*.{js,mjs,cjs,jsx}"], languageOptions: { globals: globals.browser } },
   pluginReact.configs.flat.recommended,
 ]);
+ 

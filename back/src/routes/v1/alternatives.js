@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { updateAlternative, deleteAlternative, getAlternatives, insertAlternatives } from '../controller/alternatives.js';
+import { updateAlternative, deleteAlternative, getAlternatives, insertAlternatives } from '../../controller/alternatives.js';
 
 const router = Router();
 

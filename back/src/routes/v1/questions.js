@@ -5,7 +5,7 @@ const router = Router();
 
 router.get("/api/v1/admin/questions", async function(req, res){
     const { id } = req.query;
-        console.log(id)
+        // console.log(id)
         // if (!id || isNaN(id)){
         //     res.status(400).json({
         //         "StatusCode": res.statusCode,
@@ -22,7 +22,7 @@ router.get("/api/v1/admin/questions", async function(req, res){
         }
         res.status(200).json(({
             "StatusCode": res.statusCode,
-            "StatusMessage": `Questão encontrada com o ID ${id}`,
+            "StatusMessage": `${data.length} Questões encontradas no banco de dados`,
             "Data": data
         }))
 
