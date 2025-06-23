@@ -8,7 +8,6 @@ export async function insertAlternatives(question_id, alternatives){
 try {
     const sql = `INSERT INTO alternatives(alternative_letter, alternative_text, is_correct, question_id)
     VALUES(?, ?, ?, ?)`
-    // await db.run('BEGIN TRANSACTION')
 
     for (const alt of alternatives) {   
         if (
@@ -16,7 +15,6 @@ try {
             !alt.text ||typeof alt.text !== "string" ||
             typeof alt.is_correct !== "boolean"
         ) {
-            // console.log(alt.text, alt.letter, alt.is_correct)
             throw new Error("Erro de parâmetros passados ao inserir questão no banco de dados");
         }
 

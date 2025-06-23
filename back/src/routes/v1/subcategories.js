@@ -35,7 +35,7 @@ router.get("/api/v1/admin/subcategories", async function(req, res){
         res.status(200).json({
             "StatusCode": res.statusCode,
             "StatusMessage": `${subcategories.length} Subcategories retrieved succesfully `,
-            "data": subcategories
+            "Data": subcategories
         })
     } catch (error) {
         res.status(500).json({

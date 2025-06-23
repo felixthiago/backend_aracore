@@ -11,7 +11,7 @@ router.post("/api/v1/admin/alternatives", async function (req, res){
             return res.status(400).json({
                 'StatusCode': res.statusCode,
                 'StatusMessage': 'invalid data types',
-                "data": question_id, alternatives
+                "Data": question_id, alternatives
             })
         }
 
