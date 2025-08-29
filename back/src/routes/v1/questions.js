@@ -5,13 +5,6 @@ const router = Router();
 
 router.get("/api/v1/admin/questions", async function(req, res){
     const { id } = req.query;
-        // console.log(id)
-        // if (!id || isNaN(id)){
-        //     res.status(400).json({
-        //         "StatusCode": res.statusCode,
-        //         "StatusMessage": "ID inválido, verifique os parâmetros enviados"
-        //     })
-        // }
     try {
         const data = await getQuestions(id ? Number(id): null);
         if (!data || data.length === 0){
@@ -33,6 +26,5 @@ router.get("/api/v1/admin/questions", async function(req, res){
         })
     }
 })
-
 
 export default router

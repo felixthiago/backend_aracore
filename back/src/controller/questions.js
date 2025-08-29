@@ -24,10 +24,11 @@ export async function getQuestions(q_id = null){
     }
 }
  
-// export async function insertQuestion(title, introduction, qYear, discipline){
-//     try {
-//         const db = await openDB();
-//     } catch (error) {
+export async function insertQuestion(title, introduction, qYear, discipline){
+    try {
+        const db = await openDB();
+        await db.run();
+    } catch (error) {
         
-//     }
-// }
+    }
+}

@@ -1,4 +1,3 @@
-// import { insertCategory, insertSubcategory, updateCategory, getAllRow} from "./controller/categories.js"
 import express from "express";
 const app = express();
 app.use(express.json())

@@ -20,7 +20,6 @@ router.post("/api/v1/admin/alternatives", async function (req, res){
             "StatusCode": res.statusCode,
             "statusMessage": `succesfully inserted alternatives`
         })
-
     } catch (error) {
         console.log('Erro inserindo alternativa> ', {error})
         if (error.message.includes("UNIQUE constraint failed")){

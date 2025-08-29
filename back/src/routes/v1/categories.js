@@ -3,14 +3,6 @@ import { insertCategory, updateCategory, deleteCategory, getAllCategories} from 
 
 const router = Router();
 
-// router.get('/', function(req, res){
-//     res.status(200).json({
-//         "StatusCode": res.statusCode,
-//         "StatusMessage": "Api working"
-//     })
-// })
-
-
 router.post("/api/v1/admin/categories", function(req, res){
     const { categoryName } = req.body;
     if(!categoryName){
